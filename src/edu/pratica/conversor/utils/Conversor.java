@@ -34,4 +34,27 @@ public class Conversor {
     public double getValueCOP () {
         return this.valorDeConversao * valores.COP();
     }
+
+    public double getValueAOA () {
+        return this.valorDeConversao * valores.AOA();
+    }
+
+
+    public void converterMoeda(String moedaDestino) {
+        if (moedaDestino.compareTo("BRL") == 0) {
+            System.out.println("O valor convertido é de R$ " + this.getValueBRL());
+        } else if (moedaDestino.compareTo("ARS") == 0) {
+            System.out.println("O valor convertido é de $ " + this.getValueARS());
+        } else if (moedaDestino.compareTo("BOB") == 0) {
+            System.out.println("O valor convertido é de $b " + this.getValueBOB());
+        } else if (moedaDestino.compareTo("CLP") == 0) {
+            System.out.println("O valor convertido é de $ " + this.getValueCLP());
+        } else if (moedaDestino.compareTo("COP") == 0) {
+            System.out.println("O valor convertido é de $ " + this.getValueCOP());
+        } else if (moedaDestino.compareTo("USD") == 0) {
+            System.out.println("O valor convertido é de $ " + this.getValueUSD());
+        } else if (moedaDestino.compareTo("AOA") == 0) {
+        System.out.println("O valor convertido é de Kz " + this.getValueAOA());
+    }
+    }
 }

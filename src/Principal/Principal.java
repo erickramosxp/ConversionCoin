@@ -1,6 +1,5 @@
 package Principal;
 
-import com.google.gson.Gson;
 import edu.pratica.conversor.utils.Api;
 import edu.pratica.conversor.records.InfosCoins;
 import edu.pratica.conversor.utils.Conversor;
@@ -12,49 +11,63 @@ public class Principal {
     public static void main(String[] args) throws IOException, InterruptedException {
         Api construtor = new Api();
         Scanner leitura = new Scanner(System.in);
-        Gson gson = new Gson();
+        int continuar = 1;
 
-        System.out.println("""
-                |---------- Bem vindo ao conversor de moedas --------|
-                |                                                    |
-                |--------------- MOEDAS DISPONIVEIS -----------------|
-                                 BRL - Real brasileiro
-                                 ARS - Peso Argentino
-                                 BOB - Boliviano boliviano
-                                 CLP - Peso chileno
-                                 COP - Peso colombiano
-                                 USD - Dólar americano
-                 ---------------------------------------------------
-                """);
-        System.out.println("Digite a sigla da moeda de entrada: ");
-        String moedaEntrada = leitura.next();
+        do {
+            System.out.println("""
+                    |---------- Bem vindo ao conversor de moedas --------|
+                    |                                                    |
+                    |--------------- MOEDAS DISPONIVEIS -----------------|
+                                     BRL - Real brasileiro
+                                     ARS - Peso Argentino
+                                     BOB - Boliviano boliviano
+                                     CLP - Peso chileno
+                                     COP - Peso colombiano
+                                     USD - Dólar americano
+                                     AOA - Kwanza angolano
+                     ---------------------------------------------------
+                                     Digite 0 se deseja sair
+                    """);
+            System.out.println("Digite a sigla da moeda de entrada: ");
+            String moedaEntrada = leitura.next();
+            if (moedaEntrada.compareTo("0") == 0)
+                break;
+            if (!construtor.validarMoeda(moedaEntrada.toUpperCase())) {
+                System.out.println("\t\t\t\u001B[31mOpção invalida! Tente novamente.\u001B[0m\n");
+                continue;
+            }
 
-        String jSON = construtor.getJson(moedaEntrada);
-        InfosCoins valores = gson.fromJson(jSON,InfosCoins.class);
+            InfosCoins valores = construtor.getJson(moedaEntrada);
 
-        System.out.println("Digite o valor da moeda de entrada: ");
-        double valorDeEntrada = leitura.nextDouble();
+            System.out.println("Digite o valor da moeda de entrada: ");
+            double valorDeEntrada = leitura.nextDouble();
 
-        Conversor converter = new Conversor(valorDeEntrada, valores.conversion_rates());
+            Conversor converter = new Conversor(valorDeEntrada, valores.conversion_rates());
 
-        System.out.println("Insira a moeda a qual você deseja que seja convertida: ");
-        String moedaDestino = leitura.next();
-        if (moedaDestino.compareTo("BRL") == 0) {
-            System.out.println(converter.getValueBRL());
-        } else if (moedaDestino.compareTo("ARS") == 0) {
-            System.out.println(converter.getValueARS());
-        } else if (moedaDestino.compareTo("BOB") == 0) {
-            System.out.println(converter.getValueBOB());
-        } else if (moedaDestino.compareTo("CLP") == 0) {
-            System.out.println(converter.getValueCLP());
-        } else if (moedaDestino.compareTo("COP") == 0) {
-            System.out.println(converter.getValueCOP());
-        } else if (moedaDestino.compareTo("USD") == 0) {
-            System.out.println(converter.getValueUSD());
-        }
+            System.out.println("Insira a moeda a qual você deseja que seja convertida: ");
+            String moedaDestino = leitura.next();
 
+            if(!construtor.validarMoeda(moedaDestino.toUpperCase())) {
+                do {
+                    System.out.println("\t\t\t\u001B[31mOpção invalida! Tente novamente.\u001B[0m\n");
+                    System.out.println("Insira a moeda a qual você deseja que seja convertida ou sair: ");
+                    moedaDestino = leitura.next();
+                    if (moedaDestino.toLowerCase().compareTo("sair") == 0) {
+                        break;
+                    }
+                } while (!construtor.validarMoeda(moedaDestino.toUpperCase()));
+            }
+            if (moedaDestino.toLowerCase().compareTo("sair") == 0) {
+                break;
+            }
 
+            converter.converterMoeda(moedaDestino.toUpperCase());
+            System.out.println();
 
-      //  System.out.println("R$ %.2f".formatted(valores.conversion_rates().USD() * 50));
+            System.out.println("Deseja continuar ?");
+            System.out.println("Digite 0 parar sair ou qualquer número para continuar");
+            continuar = leitura.nextInt();
+        } while (continuar != 0);
+        System.out.println("\nMuito obrigado!");
     }
 }
