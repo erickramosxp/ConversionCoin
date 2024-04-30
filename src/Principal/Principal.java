@@ -14,20 +14,7 @@ public class Principal {
         int continuar = 1;
 
         do {
-            System.out.println("""
-                    |---------- Bem vindo ao conversor de moedas --------|
-                    |                                                    |
-                    |--------------- MOEDAS DISPONIVEIS -----------------|
-                                     BRL - Real brasileiro
-                                     ARS - Peso Argentino
-                                     BOB - Boliviano boliviano
-                                     CLP - Peso chileno
-                                     COP - Peso colombiano
-                                     USD - Dólar americano
-                                     AOA - Kwanza angolano
-                     ---------------------------------------------------
-                                     Digite 0 se deseja sair
-                    """);
+            Principal.menu();
             System.out.println("Digite a sigla da moeda de entrada: ");
             String moedaEntrada = leitura.next();
             if (moedaEntrada.compareTo("0") == 0)
@@ -69,5 +56,22 @@ public class Principal {
             continuar = leitura.nextInt();
         } while (continuar != 0);
         System.out.println("\nMuito obrigado!");
+    }
+
+    private static void menu() {
+        System.out.println("""
+                    |---------- Bem vindo ao conversor de moedas --------|
+                    |                                                    |
+                    |--------------- MOEDAS DISPONIVEIS -----------------|
+                                     BRL - Real brasileiro
+                                     ARS - Peso Argentino
+                                     BOB - Boliviano boliviano
+                                     CLP - Peso chileno
+                                     COP - Peso colombiano
+                                     USD - Dólar americano
+                                     AOA - Kwanza angolano
+                     ---------------------------------------------------
+                                     Digite 0 se deseja sair
+                    """);
     }
 }

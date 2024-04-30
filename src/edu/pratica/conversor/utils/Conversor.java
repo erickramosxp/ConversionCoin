@@ -42,19 +42,20 @@ public class Conversor {
 
     public void converterMoeda(String moedaDestino) {
         if (moedaDestino.compareTo("BRL") == 0) {
-            System.out.println("O valor convertido é de R$ " + this.getValueBRL());
+            System.out.println("O valor convertido" +
+                    " é de R$ " + this.getValueBRL() + " em real brasileiro");
         } else if (moedaDestino.compareTo("ARS") == 0) {
-            System.out.println("O valor convertido é de $ " + this.getValueARS());
+            System.out.println("O valor convertido é de $ " + this.getValueARS() + " em peso argentino");
         } else if (moedaDestino.compareTo("BOB") == 0) {
-            System.out.println("O valor convertido é de $b " + this.getValueBOB());
+            System.out.println("O valor convertido é de $b " + this.getValueBOB() + " em  bolíviano da bolívia");
         } else if (moedaDestino.compareTo("CLP") == 0) {
-            System.out.println("O valor convertido é de $ " + this.getValueCLP());
+            System.out.println("O valor convertido é de $ " + this.getValueCLP() + " em peso chileno");
         } else if (moedaDestino.compareTo("COP") == 0) {
-            System.out.println("O valor convertido é de $ " + this.getValueCOP());
+            System.out.println("O valor convertido é de $ " + this.getValueCOP() + " em peso colombiano");
         } else if (moedaDestino.compareTo("USD") == 0) {
-            System.out.println("O valor convertido é de $ " + this.getValueUSD());
+            System.out.println("O valor convertido é de $ " + this.getValueUSD() + " em dólar americano");
         } else if (moedaDestino.compareTo("AOA") == 0) {
-        System.out.println("O valor convertido é de Kz " + this.getValueAOA());
+            System.out.println("O valor convertido é de Kz " + this.getValueAOA() + " em kwanza angolano");
     }
     }
 }
